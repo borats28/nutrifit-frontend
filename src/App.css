@@ -1,0 +1,143 @@
+/* --- MODERN DASHBOARD STYLES --- */
+
+/* Genel Arka Plan */
+.dashboard-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+/* Kart Tasarımı */
+.dashboard-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border-left: 5px solid #0d6efd;
+    transition: all 0.2s;
+}
+
+.stat-card:hover {
+    background-color: #f1f7ff;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #2c3e50;
+    margin-bottom: 0;
+}
+
+.stat-label {
+    color: #95a5a6;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.action-card-btn {
+    border: none;
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.action-card-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon {
+    font-size: 3rem;
+    background: #f8f9fa;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: background 0.3s;
+}
+
+.btn-diet:hover .action-icon {
+    background: #e3f2fd;
+    color: #0d6efd;
+}
+
+.btn-workout:hover .action-icon {
+    background: #fff3cd;
+    color: #ffc107;
+}
+
+.btn-analysis:hover .action-icon {
+    background: #d1e7dd;
+    color: #198754;
+}
+
+.btn-chat:hover .action-icon {
+    background: #e2e3e5;
+    color: #212529;
+}
+
+.btn-blood:hover .action-icon {
+    background: #f8d7da;
+    color: #dc3545;
+}
+
+.action-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #34495e;
+}
+
+.plan-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.plan-scroll-container {
+    background-color: #fafafa;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #eee;
+}
+
+.plan-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.plan-image-container img {
+    width: 100px;
+}
