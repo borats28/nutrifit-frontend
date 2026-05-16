@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -71,25 +71,21 @@ const Home = () => {
 
     const handleCreateDiet = () => {
         setAiLoading(true);
-        setDietPlan(null);
-        setWorkoutPlan(null);
         UserService.createDietPlan().then((res) => {
             setDietPlan(res.data);
             setAiLoading(false);
-        }, () => {
+        }).catch(() => {
             setAiLoading(false);
             alert("Hata oluştu.");
-        });
+        })
     };
 
     const handleCreateWorkout = () => {
         setAiLoading(true);
-        setWorkoutPlan(null);
-        setDietPlan(null);
         UserService.createWorkoutPlan().then((res) => {
             setWorkoutPlan(res.data);
             setAiLoading(false);
-        }, () => {
+        }).catch(() => {
             setAiLoading(false);
             alert("Hata oluştu.");
         });
@@ -105,7 +101,7 @@ const Home = () => {
 
                 {/* DİYET PLANI */}
                 <div className="col-12 col-xl-3 order-2 order-xl-1 mb-4">
-                    {dietPlan && (
+                    {dietPlan && !aiLoading && (
                         <div className="dashboard-card h-100 p-4 shadow-sm w-100 bg-white rounded-4 border">
                             <div className="d-flex justify-content-between align-items-center plan-header mb-3">
                                 <h3 className="text-primary fw-bold mb-0">🥗 Diyet Planı</h3>
@@ -255,7 +251,7 @@ const Home = () => {
 
                 {/* SAĞ SÜTUN - SPOR PLANI */}
                 <div className="col-12 col-xl-3 order-3 order-xl-3 mb-4">
-                    {workoutPlan && (
+                    {workoutPlan && !aiLoading && (
                         <div className="dashboard-card h-100 p-4 shadow-sm w-100 bg-white rounded-4 border">
                             <div className="d-flex justify-content-between align-items-center plan-header mb-3">
                                 <h3 className="text-warning fw-bold mb-0">💪 Spor Planı</h3>
