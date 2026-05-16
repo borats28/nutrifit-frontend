@@ -28,8 +28,7 @@ const Register = () => {
                     }
                 );
             },
-            (error) => {
-                toast.error(error);
+            () => {
                 setLoading(false);
             }
         );
