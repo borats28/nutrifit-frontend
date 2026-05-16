@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const LandingPage = () => {
     return (
         <div>
             {/* (GİRİŞ) */}
-            <header className="hero-section text-white text-center py-5" style={{ background: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)" }}>
+            <header className="hero-section text-white text-center py-5"
+                    style={{background: "linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%)"}}>
                 <div className="container py-5">
                     <h1 className="display-3 fw-bold mb-3">NutriFit ile Dönüşüme Başla 🚀</h1>
                     <p className="lead mb-4 fs-3">
                         Yapay Zeka destekli kişisel diyetisyeniniz ve spor koçunuz cebinizde.
-                        <br />
+                        <br/>
                         Fotoğrafını yükle, hedefini seç, gerisini AI halletsin.
                     </p>
                     <div className="d-flex justify-content-center gap-3">
@@ -39,7 +40,8 @@ const LandingPage = () => {
                                 <div className="display-4 text-primary mb-3">🧠</div>
                                 <h4 className="card-title">Gemini AI Destekli</h4>
                                 <p className="card-text text-muted">
-                                    En güncel yapay zeka teknolojisi ile metabolizmanıza ve hedeflerinize %100 uygun diyet listeleri hazırlar.
+                                    En güncel yapay zeka teknolojisi ile metabolizmanıza ve hedeflerinize %100 uygun
+                                    diyet listeleri hazırlar.
                                 </p>
                             </div>
                         </div>
@@ -50,7 +52,8 @@ const LandingPage = () => {
                                 <div className="display-4 text-warning mb-3">📸</div>
                                 <h4 className="card-title">Görsel Vücut Analizi</h4>
                                 <p className="card-text text-muted">
-                                    Sadece kilonuzu yazmayın, fotoğrafınızı yükleyin. AI, vücut tipinizi analiz etsin ve eksik bölgelerinizi söylesin.
+                                    Sadece kilonuzu yazmayın, fotoğrafınızı yükleyin. AI, vücut tipinizi analiz etsin ve
+                                    eksik bölgelerinizi söylesin.
                                 </p>
                             </div>
                         </div>
@@ -61,7 +64,8 @@ const LandingPage = () => {
                                 <div className="display-4 text-success mb-3">🥗</div>
                                 <h4 className="card-title">Kişiselleştirilmiş Plan</h4>
                                 <p className="card-text text-muted">
-                                    Alerjileriniz mi var? Vejetaryen misiniz? NutriFit sağlık durumunuza göre planı anında revize eder.
+                                    Alerjileriniz mi var? Vejetaryen misiniz? NutriFit sağlık durumunuza göre planı
+                                    anında revize eder.
                                 </p>
                             </div>
                         </div>
@@ -88,7 +92,8 @@ const LandingPage = () => {
                                 </div>
                                 <div className="list-group-item border-0 ps-0">
                                     <span className="badge bg-primary rounded-pill me-3">3</span>
-                                    <strong>AI Analizi:</strong> Yapay zeka saniyeler içinde sana özel planı ve görseli oluştursun.
+                                    <strong>AI Analizi:</strong> Yapay zeka saniyeler içinde sana özel planı ve görseli
+                                    oluştursun.
                                 </div>
                                 <div className="list-group-item border-0 ps-0">
                                     <span className="badge bg-primary rounded-pill me-3">4</span>
@@ -110,7 +115,8 @@ const LandingPage = () => {
             <section className="py-5 text-center bg-dark text-white">
                 <div className="container">
                     <h2 className="mb-4">Hayalindeki Vücuda Ulaşmak İçin Bekleme</h2>
-                    <p className="lead mb-4">Binlerce satır kod ve en gelişmiş AI modelleri senin sağlığın için çalışıyor.</p>
+                    <p className="lead mb-4">Binlerce satır kod ve en gelişmiş AI modelleri senin sağlığın için
+                        çalışıyor.</p>
                     <Link to="/register" className="btn btn-success btn-lg px-5 py-3 shadow">
                         Şimdi Ücretsiz Kayıt Ol
                     </Link>

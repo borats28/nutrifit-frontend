@@ -12,8 +12,10 @@
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.9.6",
     "react-scripts": "5.0.1",
+    "react-toastify": "^11.1.0",
     "recharts": "^3.5.1",
     "remark-gfm": "^4.0.1",
+    "sweetalert2": "^11.26.24",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

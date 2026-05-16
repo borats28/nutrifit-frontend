@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import UserService from "../services/user.service";
 
 const AiChat = () => {
     const [messages, setMessages] = useState([
-        { role: "ai", content: "Merhaba! Ben senin yapay zeka sağlık koçunum. 💪" }
+        {role: "ai", content: "Merhaba! Ben senin yapay zeka sağlık koçunum. 💪"}
     ]);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ const AiChat = () => {
     }, [messages]);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        messagesEndRef.current?.scrollIntoView({behavior: "smooth"});
     };
 
     const handleSend = async (e) => {
@@ -52,23 +52,23 @@ const AiChat = () => {
         if (!input.trim() || loading) return;
 
         const userMsgText = input;
-        setMessages((prev) => [...prev, { role: "user", content: userMsgText }]);
+        setMessages((prev) => [...prev, {role: "user", content: userMsgText}]);
         setInput("");
         setLoading(true);
 
         try {
             const response = await UserService.sendMessage(userMsgText);
             const aiReply = getCleanText(response.data);
-            setMessages((prev) => [...prev, { role: "ai", content: aiReply }]);
+            setMessages((prev) => [...prev, {role: "ai", content: aiReply}]);
         } catch (error) {
-            setMessages((prev) => [...prev, { role: "ai", content: "Bağlantı hatası oluştu. MySQL'i kontrol et." }]);
+            setMessages((prev) => [...prev, {role: "ai", content: "Bağlantı hatası oluştu. MySQL'i kontrol et."}]);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="dashboard-container pt-3" style={{ height: "90vh", overflow: "hidden" }}>
+        <div className="dashboard-container pt-3" style={{height: "90vh", overflow: "hidden"}}>
             <div className="container-fluid h-100 px-3">
                 <div className="row h-100 g-3">
 
@@ -80,7 +80,7 @@ const AiChat = () => {
                             </div>
                             <div className="card-body p-4 bg-light overflow-auto">
                                 {dietPlan ? (
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ img: () => null }}>
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={{img: () => null}}>
                                         {String(dietPlan)}
                                     </ReactMarkdown>
                                 ) : (
@@ -96,9 +96,12 @@ const AiChat = () => {
                             <div className="card-header bg-white border-bottom text-center py-3">💬 AI Koç</div>
                             <div className="card-body bg-light overflow-auto">
                                 {messages.map((msg, index) => (
-                                    <div key={index} className={`d-flex mb-3 ${msg.role === "user" ? "justify-content-end" : "justify-content-start"}`}>
-                                        <div className={`p-3 rounded-4 shadow-sm ${msg.role === "user" ? "bg-primary text-white" : "bg-white text-dark"}`} style={{ maxWidth: "90%" }}>
-                                            <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ img: () => null }}>
+                                    <div key={index}
+                                         className={`d-flex mb-3 ${msg.role === "user" ? "justify-content-end" : "justify-content-start"}`}>
+                                        <div
+                                            className={`p-3 rounded-4 shadow-sm ${msg.role === "user" ? "bg-primary text-white" : "bg-white text-dark"}`}
+                                            style={{maxWidth: "90%"}}>
+                                            <ReactMarkdown remarkPlugins={[remarkGfm]} components={{img: () => null}}>
                                                 {String(msg.content || "")}
                                             </ReactMarkdown>
                                         </div>
@@ -112,11 +115,12 @@ const AiChat = () => {
                                         </div>
                                     </div>
                                 )}
-                                <div ref={messagesEndRef} />
+                                <div ref={messagesEndRef}/>
                             </div>
                             <div className="card-footer bg-white p-3">
                                 <form onSubmit={handleSend} className="d-flex gap-2">
-                                    <input type="text" className="form-control rounded-pill" value={input} onChange={(e) => setInput(e.target.value)} disabled={loading} />
+                                    <input type="text" className="form-control rounded-pill" value={input}
+                                           onChange={(e) => setInput(e.target.value)} disabled={loading}/>
                                     <button className="btn btn-primary rounded-circle" disabled={loading}>➤</button>
                                 </form>
                             </div>
@@ -131,7 +135,7 @@ const AiChat = () => {
                             </div>
                             <div className="card-body p-4 bg-light overflow-auto">
                                 {workoutPlan ? (
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ img: () => null }}>
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]} components={{img: () => null}}>
                                         {String(workoutPlan)}
                                     </ReactMarkdown>
                                 ) : (

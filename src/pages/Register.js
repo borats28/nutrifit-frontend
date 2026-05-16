@@ -1,69 +1,91 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import { toast } from 'react-toastify';
 
 const Register = () => {
-    const [username] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [successful, setSuccessful] = useState(false);
-    const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
-    const [adSoyad, setAdSoyad] = useState("");
 
     const handleRegister = (e) => {
         e.preventDefault();
-        setMessage("");
-        setSuccessful(false);
         setLoading(true);
 
-        AuthService.register(username, email, password, adSoyad).then(
+        AuthService.register(username, email, password).then(
             (response) => {
-                setMessage(response.data.message);
-                setSuccessful(true);
+                toast.success(response.data.message || "Kaydınız başarıyla oluşturuldu! 🎉");
                 AuthService.login(username, password).then(
-                    () => { navigate("/home"); window.location.reload(); },
-                    () => { navigate("/login"); }
+                    () => {
+                        navigate("/home");
+                        window.location.reload();
+                    },
+                    () => {
+                        navigate("/login");
+                    }
                 );
             },
             (error) => {
-                const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-                setMessage(resMessage);
-                setSuccessful(false);
+                toast.error(error);
                 setLoading(false);
             }
         );
     };
 
     return (
-        <div className="container page-center-container">
-            <div className="card shadow-lg p-4 border-0 auth-card">
+        <div className="container d-flex align-items-center justify-content-center"
+             style={{ minHeight: "90vh", padding: "40px 0" }}>
+            <div className="card shadow-lg p-5 border-0 rounded-4" style={{ width: "100%", maxWidth: "550px" }}>
                 <div className="text-center mb-4">
-                    <h2 className="fw-bold text-success">Kayıt Ol</h2>
-                    <p className="text-muted">NutriFit ailesine katıl ve değişimi başlat.</p>
+                    <h1 className="fw-bold text-success mb-2">Kayıt Ol</h1>
+                    <p className="text-muted fs-5">NutriFit ailesine katılın.</p>
                 </div>
+
                 <form onSubmit={handleRegister}>
-                    {!successful && (
-                        <div>
-                            <div className="form-group mb-3">
-                                <label className="fw-bold text-secondary small mb-1">Adınız ve Soyadınız</label>
-                                <input type="text" className="form-control form-control-lg bg-light border-0" value={adSoyad} onChange={(e) => setAdSoyad(e.target.value)} required />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label className="fw-bold text-secondary small mb-1">Email</label>
-                                <input type="email" className="form-control form-control-lg bg-light border-0" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                            </div>
-                            <div className="form-group mb-4">
-                                <label className="fw-bold text-secondary small mb-1">Şifre</label>
-                                <input type="password" className="form-control form-control-lg bg-light border-0" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                            </div>
-                            <button className="btn btn-success w-100 btn-lg mb-3" disabled={loading}>
-                                {loading ? "Kaydediliyor..." : "Kayıt Ol"}
-                            </button>
-                        </div>
-                    )}
-                    {message && <div className={successful ? "alert alert-success" : "alert alert-danger"}>{message}</div>}
+                    <div className="form-group mb-3">
+                        <label className="fw-bold text-secondary mb-1">Kullanıcı Adı</label>
+                        <input
+                            type="text"
+                            className="form-control form-control-lg bg-light border-0 p-3"
+                            placeholder="Kullanıcı adınız"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group mb-3">
+                        <label className="fw-bold text-secondary mb-1">E-posta</label>
+                        <input
+                            type="email"
+                            className="form-control form-control-lg bg-light border-0 p-3"
+                            placeholder="ornek@mail.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group mb-4">
+                        <label className="fw-bold text-secondary mb-1">Şifre</label>
+                        <input
+                            type="password"
+                            className="form-control form-control-lg bg-light border-0 p-3"
+                            placeholder="********"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <button className="btn btn-success w-100 btn-lg shadow fw-bold py-3" disabled={loading}>
+                        {loading ? (
+                            <><span className="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...</>
+                        ) : "Hemen Katıl"}
+                    </button>
                 </form>
             </div>
         </div>

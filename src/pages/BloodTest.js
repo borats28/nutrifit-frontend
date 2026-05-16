@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import UserService from "../services/user.service";
@@ -8,7 +8,6 @@ const BloodTest = () => {
     const [loading, setLoading] = useState(false);
     const [history, setHistory] = useState([]);
 
-    // DÜZENLEME STATE'LERİ
     const [editingId, setEditingId] = useState(null);
     const [editText, setEditText] = useState("");
 
@@ -31,14 +30,22 @@ const BloodTest = () => {
     };
 
     const handleUpload = () => {
-        if (!selectedFile) { alert("Lütfen dosya seçin."); return; }
+        if (!selectedFile) {
+            alert("Lütfen dosya seçin.");
+            return;
+        }
         setLoading(true);
         UserService.uploadBloodTest(selectedFile).then(
             () => {
-                setLoading(false); setSelectedFile(null);
-                alert("Yüklendi! 🧬"); fetchHistory();
+                setLoading(false);
+                setSelectedFile(null);
+                alert("Yüklendi! 🧬");
+                fetchHistory();
             },
-            () => { setLoading(false); alert("Hata oluştu."); }
+            () => {
+                setLoading(false);
+                alert("Hata oluştu.");
+            }
         );
     };
 
@@ -69,15 +76,21 @@ const BloodTest = () => {
 
     const formatDate = (dateString) => {
         if (!dateString) return "Tarih Yok";
-        return new Date(dateString).toLocaleDateString("tr-TR", { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        return new Date(dateString).toLocaleDateString("tr-TR", {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
     };
 
     return (
         <div className="dashboard-container pt-4">
-            <div className="container" style={{ maxWidth: "900px" }}>
+            <div className="container" style={{maxWidth: "900px"}}>
 
                 <div className="text-center mb-5">
-                    <span style={{ fontSize: "3rem" }}>🩸</span>
+                    <span style={{fontSize: "3rem"}}>🩸</span>
                     <h1 className="fw-bold text-dark">Kan Tahlili Analizi</h1>
                 </div>
 
@@ -86,9 +99,11 @@ const BloodTest = () => {
                     <div className="card-body">
                         <h4 className="fw-bold mb-3 text-primary">➕ Yeni Tahlil Ekle</h4>
                         <div className="input-group mb-3">
-                            <input className="form-control form-control-lg" type="file" onChange={handleFileChange} accept="image/*,application/pdf" />
+                            <input className="form-control form-control-lg" type="file" onChange={handleFileChange}
+                                   accept="image/*,application/pdf"/>
                         </div>
-                        <button onClick={handleUpload} className="btn btn-primary btn-lg w-100 rounded-pill fw-bold" disabled={loading}>
+                        <button onClick={handleUpload} className="btn btn-primary btn-lg w-100 rounded-pill fw-bold"
+                                disabled={loading}>
                             {loading ? "Analiz Ediliyor..." : "Yükle ve Yorumla 🚀"}
                         </button>
                     </div>
@@ -103,12 +118,14 @@ const BloodTest = () => {
                             <div key={test.id} className="card shadow border-0 rounded-4 overflow-hidden">
 
                                 {/* KART BAŞLIĞI (HEADER) */}
-                                <div className="card-header bg-light p-3 d-flex justify-content-between align-items-center">
+                                <div
+                                    className="card-header bg-light p-3 d-flex justify-content-between align-items-center">
                                     <div>
                                         <h5 className="mb-0 fw-bold text-dark">
                                             {index === 0 ? "🌟 En Güncel Sonuç" : `Tahlil Kaydı #${history.length - index}`}
                                         </h5>
-                                        <span className="badge bg-secondary mt-1">📅 {formatDate(test.uploadDate || test.createdAt)}</span>
+                                        <span
+                                            className="badge bg-secondary mt-1">📅 {formatDate(test.uploadDate || test.createdAt)}</span>
                                     </div>
 
                                     {/* BUTONLAR */}
@@ -139,17 +156,22 @@ const BloodTest = () => {
                                                 rows="12"
                                                 value={editText}
                                                 onChange={(e) => setEditText(e.target.value)}
-                                                style={{ border: "2px solid #0d6efd" }}
+                                                style={{border: "2px solid #0d6efd"}}
                                             ></textarea>
                                             <div className="d-flex gap-2 justify-content-end">
-                                                <button onClick={() => saveEdit(test.id)} className="btn btn-success btn-lg">✅ KAYDET</button>
-                                                <button onClick={cancelEdit} className="btn btn-secondary btn-lg">İPTAL</button>
+                                                <button onClick={() => saveEdit(test.id)}
+                                                        className="btn btn-success btn-lg">✅ KAYDET
+                                                </button>
+                                                <button onClick={cancelEdit}
+                                                        className="btn btn-secondary btn-lg">İPTAL
+                                                </button>
                                             </div>
                                         </div>
                                     ) : (
                                         // NORMAL GÖRÜNÜM (Markdown)
-                                        <div style={{ lineHeight: "1.8", fontSize: "1.05rem" }}>
-                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{test.analysisResult}</ReactMarkdown>
+                                        <div style={{lineHeight: "1.8", fontSize: "1.05rem"}}>
+                                            <ReactMarkdown
+                                                remarkPlugins={[remarkGfm]}>{test.analysisResult}</ReactMarkdown>
                                         </div>
                                     )}
                                 </div>

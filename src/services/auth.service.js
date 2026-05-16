@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8080/api/auth/";
 
 class AuthService {
-    //(LOGIN) 
+    //LOGIN
     login(username, password) {
         return axios
             .post(API_URL + "login", {
@@ -19,22 +19,21 @@ class AuthService {
             });
     }
 
-    //(LOGOUT)
+    //LOGOUT
     logout() {
         sessionStorage.removeItem("user");
     }
 
-    //(REGISTER)
-    register(username, email, password, adSoyad) {
+    //REGISTER
+    register(username, email, password) {
         return axios.post(API_URL + "signup", {
             username,
             email,
-            password,
-            adSoyad
+            password
         });
     }
 
-    // MEVCUT KULLANICIYI GETİR
+    //MEVCUT KULLANICIYI GETİR
     getCurrentUser() {
         return JSON.parse(sessionStorage.getItem("user"));
     }

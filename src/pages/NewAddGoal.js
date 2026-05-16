@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import UserService from "../services/user.service";
+import {toast} from 'react-toastify'; // Toastify eklendi
 
 const NewAddGoal = () => {
     const [hedefKilo, setHedefKilo] = useState("");
@@ -13,7 +14,6 @@ const NewAddGoal = () => {
 
     const handleAdd = (e) => {
         e.preventDefault();
-        console.log(">>> BEN GÜNCEL KODUM! KONTROL: addGoal çalışıyor mu?");
         setLoading(true);
 
         const data = {
@@ -25,24 +25,23 @@ const NewAddGoal = () => {
         UserService.addGoal(data).then(
             () => {
                 setLoading(false);
-                alert("Hedefin başarıyla kaydedildi! 🎯");
+                toast.success("Hedefin başarıyla kaydedildi! 🎯");
                 navigate("/home");
             },
             (err) => {
-                console.log(err);
+                toast.error(err);
                 setLoading(false);
-                alert("Hedef eklenirken bir hata oluştu.");
             }
         );
     };
 
     return (
-        <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "80vh" }}>
-            <div className="card shadow-lg border-0 rounded-4 p-4" style={{ maxWidth: "500px", width: "100%" }}>
+        <div className="container d-flex align-items-center justify-content-center" style={{minHeight: "80vh"}}>
+            <div className="card shadow-lg border-0 rounded-4 p-4" style={{maxWidth: "500px", width: "100%"}}>
 
                 {/* MODERN BAŞLIK ALANI */}
                 <div className="text-center mb-4">
-                    <span style={{ fontSize: "3rem" }}>🎯</span>
+                    <span style={{fontSize: "3rem"}} role="img" aria-label="target">🎯</span>
                     <h2 className="fw-bold mt-2 text-dark">Yeni Hedef Belirle</h2>
                     <p className="text-muted">Sağlık yolculuğunda yeni bir sayfa aç.</p>
                 </div>
@@ -99,7 +98,12 @@ const NewAddGoal = () => {
                                 className="btn btn-primary btn-lg rounded-pill fw-bold shadow-sm"
                                 disabled={loading}
                             >
-                                {loading ? "Kaydediliyor..." : "Hedefi Kaydet"}
+                                {loading ? (
+                                    <>
+                                        <span className="spinner-border spinner-border-sm me-2"></span>
+                                        Kaydediliyor...
+                                    </>
+                                ) : "Hedefi Kaydet"}
                             </button>
 
                             <button
