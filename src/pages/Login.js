@@ -13,28 +13,30 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
 
-        AuthService.login(username, password).then(
-            () => {
+        AuthService.login(username, password)
+            .then(() => {
                 toast.success("Başarıyla giriş yapıldı! 👋");
                 navigate("/home");
                 window.location.reload();
-            },
-            (error) => {
-                let customError = "Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.";
+            })
+            .catch((error) => {
+                setLoading(false);
+                
+                // 400 hataları (validation) interceptor'da toast olarak basılıyor
+                if (error && error.status === 400) {
+                    return;
+                }
 
-                if (error.includes("500") || error.includes("401") || error.includes("Unauthorized")) {
+                let customError = "Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin. ❌";
+                
+                if (error && (error.status === 401 || error.status === 500)) {
                     customError = "Kullanıcı adı veya şifre hatalı! ❌";
-                } else if (error.includes("Network Error")) {
-                    customError = "Sunucuya bağlanılamadı. Lütfen internetinizi kontrol edin.";
+                } else if (error && error.message) {
+                    customError = error.message;
                 }
 
                 toast.error(customError);
-                setLoading(false);
-            }
-        ).catch(() => {
-            toast.error("Geçersiz Kullanıcı Bilgileri");
-            setLoading(false);
-        });
+            });
     };
 
     return (

@@ -44,39 +44,19 @@ instance.interceptors.response.use(
                 return Promise.reject(errorMessage);
             }
 
-            // 400: Validation Errors (Javax Validation)
+            // 400: Validation Errors (Javax Validation) - Sadece belirtilen dizi formatı için
             if (err.response.status === 400) {
                 const data = err.response.data;
 
-                // Eğer errors bir DIZI (Array) ise (Kullanıcının paylaştığı yeni format)
-                if (Array.isArray(data.errors)) {
+                // Sadece errors bir DIZI (Array) ise toast göster
+                if (data && Array.isArray(data.errors)) {
                     data.errors.forEach(errorObj => {
-                        const msg = errorObj.defaultMessage || errorObj.message;
-                        if (msg) toast.error(msg);
+                        const msg = errorObj.defaultMessage;
+                        if (msg) {
+                            toast.error(msg);
+                        }
                     });
-                    errorMessage = "Lütfen formdaki hataları düzeltin.";
                 }
-                // Eğer errors bir NESNE (Object/Map) ise (Örn: {username: "hata", email: "hata"})
-                else if (data.errors && typeof data.errors === 'object') {
-                    Object.values(data.errors).forEach(msg => {
-                        if (typeof msg === 'string') toast.error(msg);
-                    });
-                    errorMessage = "Lütfen formdaki hataları düzeltin.";
-                }
-                // Eğer doğrudan data bir nesneyse ve alanlar barındırıyorsa
-                else if (typeof data === 'object' && !data.message && !data.errors) {
-                    Object.values(data).forEach(msg => {
-                        if (typeof msg === 'string') toast.error(msg);
-                    });
-                    errorMessage = "Lütfen formdaki hataları düzeltin.";
-                }
-                // Tek bir mesaj varsa
-                else if (data.message) {
-                    errorMessage = data.message;
-                    toast.error(errorMessage);
-                }
-                
-                return Promise.reject(errorMessage);
             }
 
             // Diğer hata durumları için genel mesaj
@@ -84,12 +64,14 @@ instance.interceptors.response.use(
             if (err.response.status !== 400 && err.response.status !== 401) {
                 toast.error(errorMessage);
             }
+
+            return Promise.reject(data);
         } else if (err.message) {
             errorMessage = err.message;
             toast.error(errorMessage);
         }
 
-        return Promise.reject(errorMessage);
+        return Promise.reject(err);
     }
 );
 

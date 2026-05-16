@@ -15,23 +15,21 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
 
-        AuthService.register(username, email, password).then(
-            (response) => {
+        AuthService.register(username, email, password)
+            .then((response) => {
                 toast.success(response.data.message || "Kaydınız başarıyla oluşturuldu! 🎉");
-                AuthService.login(username, password).then(
-                    () => {
+                AuthService.login(username, password)
+                    .then(() => {
                         navigate("/home");
                         window.location.reload();
-                    },
-                    () => {
+                    })
+                    .catch(() => {
                         navigate("/login");
-                    }
-                );
-            },
-            () => {
+                    });
+            })
+            .catch(() => {
                 setLoading(false);
-            }
-        );
+            });
     };
 
     return (
