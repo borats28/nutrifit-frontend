@@ -45,7 +45,7 @@
 
 .stat-label {
     color: #95a5a6;
-    font-size: 0.85rem;
+    font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
@@ -140,4 +140,17 @@
 
 .plan-image-container img {
     width: 100px;
+}
+
+.app {
+    font-size: 16px;
+}
+
+.chat-block {
+    min-width: 500px;
+    font-size: 20px;
+}
+
+.h-90 {
+    height: 90%;
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import UserService from "../services/user.service";
@@ -68,12 +68,19 @@ const AiChat = () => {
     };
 
     return (
-        <div className="dashboard-container pt-3" style={{height: "90vh", overflow: "hidden"}}>
-            <div className="container-fluid h-100 px-3">
+        <div className="dashboard-container pt-3" style={{
+            height: "90vh",
+            overflow: "hidden",
+            width: "100vw",
+            marginLeft: "calc(-50vw + 50%)",
+            paddingLeft: "120px",
+            paddingRight: "120px"
+        }}>
+            <div className="container-fluid h-90 px-3">
                 <div className="row h-100 g-3">
 
                     {/* DİYET PLANI */}
-                    <div className="col-lg-4 d-none d-lg-flex flex-column h-100 pb-4">
+                    <div className="col-lg-4 d-none d-lg-flex flex-column h-100 pb-4 chat-block">
                         <div className="card shadow-sm border-0 h-100 rounded-4">
                             <div className="card-header bg-white border-bottom py-3">
                                 <h5 className="mb-0 fw-bold text-primary">🥗 Diyet Planı</h5>
@@ -91,7 +98,7 @@ const AiChat = () => {
                     </div>
 
                     {/* CHAT */}
-                    <div className="col-lg-4 col-12 h-100 pb-4">
+                    <div className="col-lg-4 col-12 h-100 pb-4 chat-block">
                         <div className="card shadow-lg border-0 h-100 rounded-4">
                             <div className="card-header bg-white border-bottom text-center py-3">💬 AI Koç</div>
                             <div className="card-body bg-light overflow-auto">
@@ -128,7 +135,7 @@ const AiChat = () => {
                     </div>
 
                     {/* SPOR PLANI */}
-                    <div className="col-lg-4 d-none d-lg-flex flex-column h-100 pb-4">
+                    <div className="col-lg-4 d-none d-lg-flex flex-column h-100 pb-4 chat-block">
                         <div className="card shadow-sm border-0 h-100 rounded-4">
                             <div className="card-header bg-white border-bottom py-3">
                                 <h5 className="mb-0 fw-bold text-warning">💪 Spor Planı</h5>
